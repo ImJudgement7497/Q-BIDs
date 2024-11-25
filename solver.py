@@ -1,32 +1,3 @@
-# Use sparse matrices instead of dense matrices 
-# Basically exact code for getting the image, just made more robust.
-# Try not to use Finite Difference, and implement other method
-
-# from scipy.sparse import lil_matrix
-
-# def construct_sparse_hamiltonian(N, increment, position_mesh):
-#     """Constructs a sparse Hamiltonian matrix."""
-#     H = lil_matrix((N, N))
-
-#     for j in range(N):
-#         if position_mesh[j] != 0:
-#             denom = increment**2
-#             H[j, j] = 4 / denom
-
-#             if j + 1 < N and (j + 1) % temp != 0 and position_mesh[j + 1] != 0:
-#                 H[j, j + 1] = -1 / denom
-
-#             if j - 1 >= 0 and j % temp != 0 and position_mesh[j - 1] != 0:
-#                 H[j, j - 1] = -1 / denom
-
-#             if j - temp >= 0 and position_mesh[j - temp] != 0:
-#                 H[j, j - temp] = -1 / denom
-
-#             if j + temp < N and position_mesh[j + temp] != 0:
-#                 H[j, j + temp] = -1 / denom
-
-#     return H
-
 # PLAN
 # Construct Sparse Matrix either using function above or similar way
 # Solve eigenvalues/vectors and check against inspo
@@ -40,11 +11,12 @@ import argparse
 import sys
 import numpy as np
 from PIL import Image
-from Debugging import Debugging
 import scipy as sp
+from Debugging import Debugging
+
 
 # Function to get potential from image
-def get_potential_from_image(file_name: str) -> tuple: 
+def get_potential_from_image(file_name: str, debugger: Debugging) -> tuple:
 
     # Open image in black and white
     image = (Image.open(file_name)).convert('1')
@@ -68,43 +40,56 @@ def get_potential_from_image(file_name: str) -> tuple:
     
     return (potential_matrix.flatten(), (total_x_points, total_y_points))
 
-def construct_sparse_hamiltonian(N: int, increment: float, potential_matrix: np.ndarray) -> sp.sparse.csr:
+def construct_sparse_hamiltonian(potential_info: tuple, debugger: Debugging) -> sp.sparse.csr:
     """Constructs a sparse Hamiltonian matrix."""
-    H = sp.sparse.lil_matrix((N, N))
+    potential_matrix = potential_info[0] # Get relevant information 
+    num_of_points = potential_info[1][0] # This is total of x-points
+    N = num_of_points**2 # Hamiltonian needs NxN as each physical point needs a row in overall matrix
+    x_intervals = np.linspace(0, 1, num_of_points) # Change this to work on any grid size
+    grid_step = np.abs(x_intervals[1] - x_intervals[0])
+    # Need for batch population
+    rows, cols, data = [], [], []
+
+    denom = grid_step**2 # Grid step squared for Forward Difference
+    denom_inv = -1 / denom # Avoids repeated calculation
 
     # Only need to focus on the terms that will be non-zero
     for j in range(N):
         # Only consider the Hamiltonian where the potential is 0
         if potential_matrix[j] == 0:
 
-            denom = increment**2
-            temp = int(np.sqrt(N))
-
             # Diaganol term will always be non-zero
-            H[j, j] = 4 / denom
+            rows.append(j)
+            cols.append(j)
+            data.append(-4*denom_inv)
 
-            if j + 1 < N and (j + 1) % temp != 0 and potential_matrix[j + 1] == 0:
-                H[j, j + 1] = -1 / denom
+            # Get neighbour info
+            right = j + 1
+            left = j - 1
+            up = j + num_of_points
+            down = j - num_of_points
 
-            if j - 1 >= 0 and j % temp != 0 and potential_matrix[j - 1] == 0:
-                H[j, j - 1] = -1 / denom
+            # This is the Forward Diff method
+            # Checks the nearest neighbours and if they are within the potential and not on the boundaries
+            if  right < N and right % num_of_points != 0 and potential_matrix[right] == 0:
+                rows.append(j)
+                cols.append(right)
+                data.append(denom_inv)
 
-            if j - temp >= 0 and potential_matrix[j - temp] == 0:
-                H[j, j - temp] = -1 / denom
+            if left >= 0 and j % num_of_points != 0 and potential_matrix[left] == 0:
+                rows.append(j)
+                cols.append(left)
+                data.append(denom_inv)
 
-            if j + temp < N and potential_matrix[j + temp] == 0:
-                H[j, j + temp] = -1 / denom
+            if down >= 0 and potential_matrix[down] == 0:
+                rows.append(j)
+                cols.append(down)
+                data.append(denom_inv)
 
-    return H.tocsr()
+            if up < N and potential_matrix[up] == 0:
+                rows.append(j)
+                cols.append(up)
+                data.append(denom_inv)
 
-parser = argparse.ArgumentParser()
-parser.add_argument('--debug', action='store_true', help='Enable debug mode')
-args = parser.parse_args()
-
-debugger = Debugging(debug=args.debug)
-
-temp = get_potential_from_image(file_name="./three.png")
-Hamiltonian = construct_sparse_hamiltonian(temp[1][0] * temp[1][1], 1, temp[0])
-
-eigenvalues, eigenvectors = sp.sparse.linalg.eigsh(Hamiltonian, k=8)
-
+    # Returns Hamiltonian by creating sparse matrix in batch
+    return sp.sparse.coo_matrix((data, (rows, cols)), shape=(N, N)).tocsr() # Return compressed sparse row matrix for eigen solver
