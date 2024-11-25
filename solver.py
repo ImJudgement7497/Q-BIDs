@@ -49,7 +49,7 @@ def construct_sparse_hamiltonian(potential_info: tuple, debugger: Debugging) -> 
     grid_step = np.abs(x_intervals[1] - x_intervals[0])
     # Need for batch population
     rows, cols, data = [], [], []
-
+    print(grid_step)
     denom = grid_step**2 # Grid step squared for Forward Difference
     denom_inv = -1 / denom # Avoids repeated calculation
 
