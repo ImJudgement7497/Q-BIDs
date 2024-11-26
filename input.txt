@@ -1,1 +1,1 @@
-potential_image_name = hundred.png
+potential_image_name = square_150.png

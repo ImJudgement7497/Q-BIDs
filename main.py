@@ -19,7 +19,7 @@ potential_info = get_potential_from_image(file_name=image_file, debugger=debugge
 Hamiltonian = construct_sparse_hamiltonian(potential_info, debugger=debugger)
 
 # Eigenvalues and eigenvectors from eigsh
-eigenvalues, eigenvectors = sp.sparse.linalg.eigsh(Hamiltonian, k=1)
+eigenvalues, eigenvectors = sp.sparse.linalg.eigsh(Hamiltonian, k=20)
 
 idx = eigenvalues.argsort()  # Sort in ascending order
 print(eigenvalues[idx])
@@ -72,4 +72,67 @@ for i in range(eigenvectors.shape[1]):  # iterate over each eigenvector (column)
     plt.savefig(f'./{image_file}_plots/{i}.png')
     plt.close(figi)
 
+for i in range(eigenvectors.shape[1]):
+    fig, ax = plt.subplots(1, 1)
+    
+    eigenvector_reshaped = np.transpose(eigenvectors[:, i].reshape(M, N))
 
+    # Plot nodal lines (contours where the eigenfunction equals zero)
+    ax.contour(eigenvector_reshaped, levels=[0], colors='black', linewidths=1.0)
+    plt.setp(ax, xticks=[], yticks=[])
+    ax.set_aspect('equal')
+
+    # Set title for the state
+    if i == 0:
+        ax.set_title('The ground state (Nodal Lines)', fontsize=12)
+    elif i == 1:
+        ax.set_title('The 1$^{st}$ excited state (Nodal Lines)', fontsize=12)
+    elif i == 2:
+        ax.set_title('The 2$^{nd}$ excited state (Nodal Lines)', fontsize=12)
+    elif i == 3:
+        ax.set_title('The 3$^{rd}$ excited state (Nodal Lines)', fontsize=12)
+    else:
+        ax.set_title(f'{i}$^{{th}}$ excited state (Nodal Lines)', fontsize=12)
+
+    # Label the eigenvalue on the plot
+    ax.text(0.5, 0.95, f'Eigenvalue: {eigenvalues[i]:.3f}', transform=ax.transAxes, ha='center', fontsize=10)
+
+    # Save the plot
+    plt.savefig(f'./{image_file}_plots/{i}_nodal_lines_only.png')
+    plt.close(fig)
+
+for i in range(eigenvectors.shape[1]):
+    fig, ax = plt.subplots(1, 1, figsize=(6, 6))
+    
+    eigenfunction = np.transpose(eigenvectors[:, i].reshape(M, N))
+
+    # Plot the eigenfunction
+    plot = ax.imshow(eigenfunction, cmap='seismic', interpolation='gaussian', origin='lower')
+    plt.setp(ax, xticks=[], yticks=[])
+    ax.set_aspect('equal')  # Ensure square aspect ratio
+
+    # Add colorbar for eigenfunction values
+    divider = make_axes_locatable(ax)
+    cax = divider.append_axes("right", size="3%", pad=0.1)
+    cbar = fig.colorbar(plot, ax=ax, extend='both', cax=cax)
+    cbar.minorticks_on()
+    cbar.ax.tick_params(labelsize=5, pad=0.1)
+
+    # Set title for the state
+    if i == 0:
+        ax.set_title('The ground state (Eigenfunction)', fontsize=12)
+    elif i == 1:
+        ax.set_title('The 1$^{st}$ excited state (Eigenfunction)', fontsize=12)
+    elif i == 2:
+        ax.set_title('The 2$^{nd}$ excited state (Eigenfunction)', fontsize=12)
+    elif i == 3:
+        ax.set_title('The 3$^{rd}$ excited state (Eigenfunction)', fontsize=12)
+    else:
+        ax.set_title(f'{i}$^{{th}}$ excited state (Eigenfunction)', fontsize=12)
+
+    # Label the eigenvalue on the plot
+    ax.text(0.5, 0.95, f'Eigenvalue: {eigenvalues[i]:.3f}', transform=ax.transAxes, ha='center', fontsize=10)
+
+    # Save the plot
+    plt.savefig(f'./{image_file}_plots/{i}_eigenfunction.png')
+    plt.close(fig)
