@@ -13,13 +13,14 @@ import numpy as np
 from PIL import Image
 import scipy as sp
 from Debugging import Debugging
+import cv2
 
 
 # Function to get potential from image
-def get_potential_from_image(file_name: str, debugger: Debugging) -> tuple:
+def get_potential_from_image(file_name: str, debugger: Debugging, boundary_value) -> tuple:
 
     # Open image in black and white
-    image = (Image.open(file_name)).convert('1')
+    image = (Image.open(file_name)).convert('L')
 
     # Create an image matrix with white pixels being false, and black being true
     bool_image_matrix = np.array(image) == 0
@@ -35,15 +36,19 @@ def get_potential_from_image(file_name: str, debugger: Debugging) -> tuple:
 
     # Create a mesh for when constructing the Hamiltonian
 
-    potential_matrix = np.where(bool_image_matrix, 0, 1) # MAKE THIS USER INPUTTED
+    potential_matrix = np.where(bool_image_matrix, 0, boundary_value) # MAKE THIS USER INPUTTED
 
     # Save debug information
     debugger.debug_store(bool_image_matrix, "./debug/bool_image.mat")
     debugger.debug_store(potential_matrix, "./debug/position_mesh.mat")
-    
-    return (potential_matrix, N)
 
-def construct_hamiltonian(potential_info, debugger: Debugging, boundary_value=1000):
+    image = np.array(image)
+    # Perform Canny edge detection
+    edges = cv2.Canny(image, 50, 150)
+    
+    return (potential_matrix, N, edges)
+
+def construct_hamiltonian(potential_info, debugger: Debugging, boundary_value: float):
 
     potential_matrix = potential_info[0]
     N = potential_info[1]
