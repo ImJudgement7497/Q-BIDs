@@ -19,13 +19,13 @@ if not os.path.isdir(f"./results/{image_file}_plots"):
 debugger = Debugging(debug=parser.args.debug)
 
 potential_info = get_potential_from_image(file_name=image_file, debugger=debugger)
-Hamiltonian = construct_hamiltonian(potential_info)
+Hamiltonian = construct_hamiltonian(potential_info, debugger)
 
 # Eigenvalues and eigenvectors from eigsh
-eigenvalues, eigenvectors = sp.sparse.linalg.eigsh(Hamiltonian, k=10)
-print(eigenvalues)
+eigenvalues, eigenvectors = sp.sparse.linalg.eigsh(Hamiltonian, k=10, which="SM")
+# print(eigenvalues)
 idx = eigenvalues.argsort()  # Sort in ascending order
-print(eigenvalues[idx])
+# print(eigenvalues[idx])
 eigenvalues = eigenvalues[idx]  # Sorted eigenvalues
 idx = eigenvalues.argsort()[::-1]
 eigenvectors = eigenvectors[:, idx]  # Reordered eigenvectors to match eigenvalues

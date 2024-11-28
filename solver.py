@@ -35,15 +35,15 @@ def get_potential_from_image(file_name: str, debugger: Debugging) -> tuple:
 
     # Create a mesh for when constructing the Hamiltonian
 
-    potential_matrix = np.where(bool_image_matrix, 0, 1e6) # MAKE THIS USER INPUTTED
+    potential_matrix = np.where(bool_image_matrix, 0, 1) # MAKE THIS USER INPUTTED
 
     # Save debug information
     debugger.debug_store(bool_image_matrix, "./debug/bool_image.mat")
     debugger.debug_store(potential_matrix, "./debug/position_mesh.mat")
     
-    return (potential_matrix.flatten(), N)
+    return (potential_matrix, N)
 
-def construct_hamiltonian(potential_info):
+def construct_hamiltonian(potential_info, debugger: Debugging, boundary_value=1000):
 
     potential_matrix = potential_info[0]
     N = potential_info[1]
@@ -60,10 +60,23 @@ def construct_hamiltonian(potential_info):
     # See paper for why we do this
     K = -1/2 * sp.sparse.kronsum(D, D)
 
-    # Construct V
-    V = sp.sparse.diags(potential_matrix.reshape(N**2), (0))
+    V = potential_matrix.reshape(N, N)  # Reshape into 2D grid
+    
+    # Apply infinite potential at the boundaries by setting large values at the boundary indices
+    V[0, :] = boundary_value  # Top boundary
+    V[-1, :] = boundary_value  # Bottom boundary
+    V[:, 0] = boundary_value  # Left boundary
+    V[:, -1] = boundary_value  # Right boundary
+    
+    # Convert the potential into a sparse matrix
+    V_sparse = sp.sparse.diags(V.flatten(), 0)  # Flatten V and convert to sparse
+
+    # print(V_sparse.toarray())
 
     # Construct H
-    H = K + V
+    H = K + V_sparse
 
+    debugger.debug_store(H, "./debug/Ham.mat")
+    # for row in H.toarray():
+    #     print(row)
     return H
