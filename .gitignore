@@ -1,5 +1,6 @@
 *.png
 *.pyc
+*.npy
 /debug/*
 input.txt
 /results/*
