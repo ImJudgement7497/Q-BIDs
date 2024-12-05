@@ -1,3 +1,9 @@
-potential_image_name = triangle_50.png
+shape = e_triangle
+x_start = -0.5
+x_end = 0.5
+y_start = -0.5
+y_end = 0.5
+grid_size = 100
+
 max_level = 10
 boundary_value = 1e6
