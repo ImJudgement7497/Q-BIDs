@@ -49,4 +49,4 @@ np.save(f"./results/{image_file}_eigenvalues_upto_state_{max_level}.npy", eigenv
 plot_potential(potential_info, image_file)
 plot_eigenfunctions(eigenvectors, potential_info, max_level, image_file)
 plot_prob_densities(eigenvectors, potential_info, max_level, image_file)
-plot_eigenfunction_zero_crossings(eigenvectors, potential_info, max_level, image_file)
+# plot_eigenfunction_zero_crossings(eigenvectors, potential_info, max_level, image_file)

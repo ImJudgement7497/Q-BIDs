@@ -1,3 +1,3 @@
-potential_image_name = square_100.png
+potential_image_name = triangle_50.png
 max_level = 10
 boundary_value = 1e6
