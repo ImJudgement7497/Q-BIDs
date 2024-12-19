@@ -3,7 +3,7 @@ x_start = -0.5
 x_end = 0.5
 y_start = -0.5
 y_end = 0.5
-grid_size = 1000
+grid_size = 500
 
-max_level = 10
+max_level = 100
 boundary_value = 1e6
