@@ -68,8 +68,8 @@ else:
     eigenvalues, eigenvectors = sp.sparse.linalg.eigsh(Hamiltonian, k=max_level, which="SM")
     #eigenvectors = eigenvectors * (grid_step**2)
     plot_potential(potential_matrix, potential_type)
-    # plot_eigenfunctions_from_shape(eigenvectors, grid_info[4], max_level, potential_type)
-    # plot_nodal_lines(eigenvectors, grid_info[4], max_level, potential_type)
+    plot_eigenfunctions_from_shape(eigenvectors, grid_info[4], max_level, potential_type)
+    plot_nodal_lines(eigenvectors, grid_info[4], max_level, potential_type)
 
 
 # Eigenvalues and eigenvectors from eigsh
