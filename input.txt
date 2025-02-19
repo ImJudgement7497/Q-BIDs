@@ -1,9 +1,11 @@
-potential_image_name = ./test/concave_test_200.png
-x_start = -0.5
-x_end = 0.5
-y_start = -0.5
-y_end = 0.5
-grid_size = 500
+#potential_image_name = concave_test_200.png
+function = elliptical_function
+#shape = square
+x_start = -10
+x_end = 10
+y_start = -10
+y_end = 10
+grid_size = 100
 
 max_level = 2
-boundary_value = 1e10
+boundary_value = 1e6
