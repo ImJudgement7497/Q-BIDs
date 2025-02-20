@@ -1,11 +1,11 @@
-potential_image_name = ink_kidney_100.png
-#function = kidney_function
+#potential_image_name = ink_kidney_100.png
+function = convex_test_nephroid_function_a=1
 #shape = square
-x_start = -10
-x_end = 10
-y_start = -10
-y_end = 10
-grid_size = 100
+x_start = -6
+x_end = 6
+y_start = -6
+y_end = 6
+grid_size = 250
 
 max_level = 2
 boundary_value = 1e6

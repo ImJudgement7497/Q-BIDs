@@ -1,11 +1,43 @@
 import numpy as np
 
-def function(x, y, a=4):
-    theta = np.arctan2(y, x)  # Compute theta from Cartesian coordinates
-    r_curve = a * (3 * np.cos(theta) - np.cos(3 * theta))  # Radius from parametric equation
-    r_point = np.sqrt(x**2 + y**2)  # Radius of (x, y)
+# def function(x, y, a=4):
+#     theta = np.arctan2(y, x)  # Compute theta from Cartesian coordinates
+#     r_curve = a * (3 * np.cos(theta) - np.cos(3 * theta))  # Radius from parametric equation
+#     r_point = np.sqrt(x**2 + y**2)  # Radius of (x, y)
     
-    return r_point - r_curve  # Difference in radius (implicit function)
+#     return r_point - r_curve  # Difference in radius (implicit function)
+
+# def function(x, y):
+#     
+#     return (r-2)**2 + ((theta**2) / 4) - 1
+
+r""" Nephroid Equation for constant a"""
+def function(x, y, a=1):
+    inside = x**2 + y**2 - 4*(a**2)
+    return (inside**3) - 108 * (y**2) * (a**4)
+
+r"""Polar Nephroid Equation for constant a"""
+# def function(x, y, a=1):
+#     r = np.sqrt(x**2 + y**2)
+#     theta = np.arctan2(y, x)
+    
+#     first = (r/(2*a))**(2/3)
+#     second = np.abs(np.sin(theta/2)) ** (2/3)
+
+#     third = np.abs(np.cos(theta/2)) ** (2/3)
+    
+#     return first - second - third
+
+r"""Polar Nephroid Equation in terms of x and y"""
+# def function(x, y, a=1):
+#     first = np.abs(x/(2*a))**(2/3)
+#     second = np.abs(np.sin(y/2)) ** (2/3)
+
+#     third = np.abs(np.cos(y/2)) ** (2/3)
+    
+#     return first - second - third
+
+
 
 # def function(x, y):
 #     c = 10

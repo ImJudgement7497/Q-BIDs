@@ -76,12 +76,13 @@ if function_bool:
     
     Z = function.function(X, Y)
     
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(6, 6))
     plt.contour(X, Y, Z, levels=[0], colors='blue')
     plt.title("Function in Cartesian Coordinates")
     plt.xlabel("X")
     plt.ylabel("Y")
     plt.savefig(f"./plots/{potential_type}_plots/function_plot.png")
+    print("Plotted function")
     potential_matrix = np.where(Z <= 0, 0, boundary_value)
     
     if potential_matrix.size != grid_info[4] * grid_info[4]:
