@@ -1,4 +1,4 @@
-potential_image_name = ink_test_100.png
+potential_image_name = ink_kidney_100.png
 #function = kidney_function
 #shape = square
 x_start = -10
