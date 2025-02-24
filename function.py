@@ -12,11 +12,19 @@ import numpy as np
 #     return (r-2)**2 + ((theta**2) / 4) - 1
 
 r""" Nephroid Equation for constant a"""
-def function(x, y, a=1):
-    inside = x**2 + y**2 - 4*(a**2)
-    return (inside**3) - 108 * (y**2) * (a**4)
+# def function(x, y, a=1):
+#     inside = x**2 + y**2 - 4*(a**2)
+#     return (inside**3) - 108 * (y**2) * (a**4)
 
-r"""Polar Nephroid Equation for constant a"""
+r""" Cardioid Equation for constant a"""
+def function(x, y, a=2):
+    r = np.sqrt(x**2 + y**2)
+    theta = np.arctan2(y, x)
+    
+    return r - 2*a*(1-np.cos(theta))
+    
+    
+# r"""Polar Nephroid Equation for constant a"""
 # def function(x, y, a=1):
 #     r = np.sqrt(x**2 + y**2)
 #     theta = np.arctan2(y, x)
