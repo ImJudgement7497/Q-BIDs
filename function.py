@@ -17,12 +17,16 @@ r""" Nephroid Equation for constant a"""
 #     return (inside**3) - 108 * (y**2) * (a**4)
 
 r""" Cardioid Equation for constant a"""
-def function(x, y, a=2):
-    r = np.sqrt(x**2 + y**2)
-    theta = np.arctan2(y, x)
+# def function(x, y, a=2):
+#     r = np.sqrt(x**2 + y**2)
+#     theta = np.arctan2(y, x)
     
-    return r - 2*a*(1-np.cos(theta))
-    
+#     return r - 2*a*(1-np.cos(theta))
+
+r""" Astroid Equation for constant a"""
+def function(x, y, a=5):
+    inside = x**2 + y**2 - a**2
+    return (inside)**3 + 27*(a**2)*(x**2)*(y**2)
     
 # r"""Polar Nephroid Equation for constant a"""
 # def function(x, y, a=1):

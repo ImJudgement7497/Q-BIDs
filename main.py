@@ -41,6 +41,7 @@ grid_info_names = ["x_start", "x_end", "y_start", "y_end", "grid_size"]
 grid_info = [parser.get_config_value(elm) for elm in grid_info_names]
 grid_info.append(1 / (grid_info[4] - 1))
 
+print(f"input.txt parsed: Using {potential_type}")
 debugger = Debugging(debug=parser.args.debug)
 
 if function_bool:
@@ -56,6 +57,8 @@ if function_bool:
     plt.ylabel("Y")
     plt.savefig(f"./plots/{potential_type}_plots/function_plot.png")
     
+    print("Function plotted")
+    
     potential_matrix = np.where(Z <= 0, 0, boundary_value).reshape(grid_info[4], grid_info[4])
 else:
     potential_matrix = (
@@ -64,6 +67,7 @@ else:
     )
 
 Hamiltonian = construct_hamiltonian(potential_matrix, grid_info[4], debugger, boundary_value)
+print("Hamiltonian constructed, solving now")
 eigenvalues, eigenvectors = scipy.sparse.linalg.eigsh(Hamiltonian, k=max_level, which="SM")
 eigenvectors *= grid_info[-1] ** 2
 
@@ -71,5 +75,5 @@ plot_potential(potential_matrix, potential_type, grid_info, is_shape)
 plot_eigenfunctions_from_shape(eigenvectors, grid_info[4], max_level, potential_type) if is_shape else plot_eigenfunctions_from_image(eigenvectors, potential_matrix.shape, max_level, potential_type)
 plot_nodal_lines(eigenvectors, grid_info[4] if is_shape else potential_matrix.shape[0], max_level, potential_type)
 
-np.save(f"./results/{potential_type}_eigenvectors_upto_state_{max_level}.npy", eigenvectors)
-np.save(f"./results/{potential_type}_eigenvalues_upto_state_{max_level}.npy", eigenvalues)
+# np.save(f"./results/{potential_type}_eigenvectors_upto_state_{max_level}.npy", eigenvectors)
+# np.save(f"./results/{potential_type}_eigenvalues_upto_state_{max_level}.npy", eigenvalues)
