@@ -39,7 +39,7 @@ boundary_value = parser.get_config_value("boundary_value") or 1e6
 
 grid_info_names = ["x_start", "x_end", "y_start", "y_end", "grid_size"]
 grid_info = [parser.get_config_value(elm) for elm in grid_info_names]
-grid_info.append(1 / (grid_info[4] - 1))
+grid_info.append((grid_info[1] - grid_info[0]) / (grid_info[4] - 1))
 
 print(f"input.txt parsed: Using {potential_type}")
 debugger = Debugging(debug=parser.args.debug)

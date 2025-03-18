@@ -7,9 +7,11 @@ import numpy as np
     
 #     return r_point - r_curve  # Difference in radius (implicit function)
 
-# def function(x, y):
-#     
-#     return (r-2)**2 + ((theta**2) / 4) - 1
+r""" Yang and Guo Example"""
+def function(x, y):
+    r = np.sqrt(x**2 + y**2)
+    theta = np.arctan2(y, x)
+    return (r-2)**2 + ((theta**2) / 4) - 1
 
 r""" Nephroid Equation for constant a"""
 # def function(x, y, a=1):
@@ -17,11 +19,10 @@ r""" Nephroid Equation for constant a"""
 #     return (inside**3) - 108 * (y**2) * (a**4)
 
 r""" Cardioid Equation for constant a"""
-def function(x, y, a=2):
-    r = np.sqrt(x**2 + y**2)
-    theta = np.arctan2(y, x)
+# def function(x, y, a=2):
+#     
     
-    return r - 2*a*(1-np.cos(theta))
+#     return r - 2*a*(1-np.cos(theta))
 
 r""" Astroid Equation for constant a"""
 # def function(x, y, a=5):
@@ -32,7 +33,7 @@ r"""Circle Equation for radius a"""
 # def function(x, y, a=5):
 #     return x**2 + y**2 - a**2
     
-# r"""Polar Nephroid Equation for constant a"""
+r"""Polar Nephroid Equation for constant a"""
 # def function(x, y, a=1):
 #     r = np.sqrt(x**2 + y**2)
 #     theta = np.arctan2(y, x)
