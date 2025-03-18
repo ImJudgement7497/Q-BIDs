@@ -52,9 +52,9 @@ if function_bool:
     
     plt.figure(figsize=(6, 6))
     plt.contour(X, Y, Z, levels=[0], colors='blue')
-    plt.title("Function in Cartesian Coordinates")
-    plt.xlabel("X")
-    plt.ylabel("Y")
+    # plt.title("Function in Cartesian Coordinates")
+    plt.xlabel("x")
+    plt.ylabel("y")
     plt.savefig(f"./plots/{potential_type}_plots/function_plot.png")
     
     print("Function plotted")

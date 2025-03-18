@@ -1,11 +1,11 @@
 #potential_image_name = ink_kidney_100.png
-function = test_function_2
+function = astroid_a=5_g=250
 #shape = square
-x_start = 0
-x_end = 4
-y_start = 0
-y_end = 4
-grid_size = 100
+x_start = -5
+x_end = 5
+y_start = -5
+y_end = 5
+grid_size = 250
 
 max_level = 2
 boundary_value = 1e9

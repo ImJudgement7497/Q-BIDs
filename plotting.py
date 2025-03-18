@@ -6,7 +6,7 @@ def plot_potential(potential_matrix, potential_type, grid_info, is_shape):
     if not is_shape:
         plt.figure(figsize=(6, 6))
         plt.imshow(potential_matrix, extent=[0, grid_info[4], 0, grid_info[4]], origin='lower', cmap='coolwarm', alpha=0.8)
-        plt.colorbar(label="Potential")
+        # plt.colorbar(label="Potential")
 
         plt.xlabel("x")
         plt.ylabel("y")
@@ -17,7 +17,7 @@ def plot_potential(potential_matrix, potential_type, grid_info, is_shape):
     else:
         plt.figure(figsize=(6, 6))
         plt.imshow(potential_matrix, extent=[grid_info[0], grid_info[1], grid_info[2], grid_info[3]], origin='lower', cmap='coolwarm', alpha=0.8)
-        plt.colorbar(label="Potential")
+        # plt.colorbar(label="Potential")
 
         plt.xlabel("x")
         plt.ylabel("y")
