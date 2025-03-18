@@ -13,6 +13,7 @@ def plot_potential(potential_matrix, potential_type, grid_info, is_shape):
         plt.title("Potential Matrix")
         plt.grid()
         plt.savefig(f"./plots/{potential_type}_plots/potential_plot.png")
+        plt.close()
     else:
         plt.figure(figsize=(6, 6))
         plt.imshow(potential_matrix, extent=[grid_info[0], grid_info[1], grid_info[2], grid_info[3]], origin='lower', cmap='coolwarm', alpha=0.8)
@@ -23,6 +24,7 @@ def plot_potential(potential_matrix, potential_type, grid_info, is_shape):
         plt.title("Potential Matrix")
         plt.grid()
         plt.savefig(f"./plots/{potential_type}_plots/potential_plot.png")
+        plt.close()
         
 
 
@@ -38,6 +40,7 @@ def plot_eigenfunctions_from_image(eigenvectors, potential_info, max_level, imag
         # plt.colorbar(eig)
         plt.tight_layout()
         plt.savefig(f"./plots/{image_file}_plots/{state}/{state}_eigenfunction.png")
+        plt.close()
 
 def plot_prob_densities_from_image(eigenvectors, potential_info, max_level, image_file):
     N = potential_info[1]
@@ -52,6 +55,7 @@ def plot_prob_densities_from_image(eigenvectors, potential_info, max_level, imag
         # plt.colorbar(eig)
         plt.tight_layout()
         plt.savefig(f"./plots/{image_file}_plots/{state}/{state}_prob_density.png")
+        plt.close()
 
 def plot_eigenfunctions_from_shape(eigenvectors, grid_size, max_level, potential_type):
     for state in range(max_level):
@@ -62,6 +66,7 @@ def plot_eigenfunctions_from_shape(eigenvectors, grid_size, max_level, potential
         # plt.colorbar(eig)
         plt.tight_layout()
         plt.savefig(f"./plots/{potential_type}_plots/{state}/{state}_eigenfunction.png")
+        plt.close()
 
 def plot_prob_densities_from_shape(eigenvectors, grid_size, max_level, potential_type):
     for state in range(max_level):
@@ -73,6 +78,7 @@ def plot_prob_densities_from_shape(eigenvectors, grid_size, max_level, potential
         # plt.colorbar(eig)
         plt.tight_layout()
         plt.savefig(f"./plots/{potential_type}_plots/{state}/{state}_prob_density.png")
+        plt.close()
 
 # def plot_eigenfunction_zero_crossings(eigenvectors, potential_info, max_level, image_file):
 #     N = potential_info[1]
@@ -103,3 +109,4 @@ def plot_nodal_lines(eigenvectors, grid_size, max_level, potential_type):
         plt.setp(ax, xticks=[], yticks=[])
         ax.set_aspect('equal')
         plt.savefig(f"./plots/{potential_type}_plots/{state}/{state}_nodal_lines.png")
+        plt.close()

@@ -67,13 +67,16 @@ else:
     )
 
 Hamiltonian = construct_hamiltonian(potential_matrix, grid_info[4], debugger, boundary_value)
-print("Hamiltonian constructed, solving now")
+print(f"Hamiltonian constructed of size {Hamiltonian.get_shape()}, solving now")
 eigenvalues, eigenvectors = scipy.sparse.linalg.eigsh(Hamiltonian, k=max_level, which="SM")
 eigenvectors *= grid_info[-1] ** 2
+
+print("Solved!")
 
 plot_potential(potential_matrix, potential_type, grid_info, is_shape)
 plot_eigenfunctions_from_shape(eigenvectors, grid_info[4], max_level, potential_type) if is_shape else plot_eigenfunctions_from_image(eigenvectors, potential_matrix.shape, max_level, potential_type)
 plot_nodal_lines(eigenvectors, grid_info[4] if is_shape else potential_matrix.shape[0], max_level, potential_type)
 
+print("Done")
 # np.save(f"./results/{potential_type}_eigenvectors_upto_state_{max_level}.npy", eigenvectors)
 # np.save(f"./results/{potential_type}_eigenvalues_upto_state_{max_level}.npy", eigenvalues)
