@@ -1,4 +1,4 @@
-potential_image_name = input_nephroid_ortho_polar_g=250.png
+potential_image_name = input_cardioid_ortho_polar_g=500.png
 #function = astroid_a=5_g=250
 #function = cardioid_cartesian_g=250
 #shape = square
@@ -6,7 +6,7 @@ x_start = -9
 x_end = 3
 y_start = -6
 y_end = 6
-grid_size = 250
+grid_size = 500
 
 max_level = 2
 boundary_value = 1e9
