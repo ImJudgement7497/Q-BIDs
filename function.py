@@ -7,11 +7,17 @@ import numpy as np
     
 #     return r_point - r_curve  # Difference in radius (implicit function)
 
-r""" Yang and Guo Example"""
+r""" Yang and Guo Example Cartesian Form
+x = [-2, 4], y = [-3, 3]"""
 # def function(x, y):
 #     r = np.sqrt(x**2 + y**2)
 #     theta = np.arctan2(y, x)
 #     return (r-2)**2 + ((theta**2) / 4) - 1
+
+r""" Yang and Guo Example Polar Orthognal Form
+x = [-0.5, 4.5], y = [-2.5, 2.5]"""
+# def function(x, y):
+#     return (x-2)**2 + ((y**2) / 4) - 1
 
 r""" Nephroid Equation for constant a
 x = y = [-8.5, 8.5] for a = 2"""
@@ -19,19 +25,34 @@ x = y = [-8.5, 8.5] for a = 2"""
 #     inside = x**2 + y**2 - 4*(a**2)
 #     return (inside**3) - 108 * (y**2) * (a**4)
 
+r""" DOESNT WORK Nephroid Polar Orthogonal Equation for constant a
+x = y = [-8.5, 8.5] for a = 2"""
+# def function(x, y, a=2):
+#     first = (x / (2 * a)) ** (2 / 3)
+#     second = np.abs(np.sin(y / 2)) ** (2 / 3)
+#     third = np.abs(np.cos(y / 2)) ** (2 / 3)
+    
+#     Z = first - second - third
+    
+#     # Mask the values outside of y = [0, 2π]
+#     Z[y < 0] = np.nan  # Mask below y = 0
+#     Z[y > 2 * np.pi] = np.nan  # Mask above y = 2π
+    
+#     return Z
+
 r""" Cardioid Equation for constant a
 x=[-9, 3]
 y=[-6, 6]"""
-# def function(x, y, a=2):
-#     r = np.sqrt(x**2 + y**2)
-#     theta = np.arctan2(y, x)
+def function(x, y, a=2):
+    r = np.sqrt(x**2 + y**2)
+    theta = np.arctan2(y, x)
     
-#     return r - 2*a*(1-np.cos(theta))
+    return r - 2*a*(1-np.cos(theta))
 
 r""" Astroid Equation for constant a"""
-def function(x, y, a=5):
-    inside = x**2 + y**2 - a**2
-    return (inside)**3 + 27*(a**2)*(x**2)*(y**2)
+# def function(x, y, a=5):
+#     inside = x**2 + y**2 - a**2
+#     return (inside)**3 + 27*(a**2)*(x**2)*(y**2)
 
 r"""Circle Equation for radius a"""
 # def function(x, y, a=5):

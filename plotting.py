@@ -8,9 +8,9 @@ def plot_potential(potential_matrix, potential_type, grid_info, is_shape):
         plt.imshow(potential_matrix, extent=[0, grid_info[4], 0, grid_info[4]], origin='lower', cmap='coolwarm', alpha=0.8)
         # plt.colorbar(label="Potential")
 
-        plt.xlabel("x")
-        plt.ylabel("y")
-        plt.title("Potential Matrix")
+        # plt.xlabel("x")
+        # plt.ylabel("y")
+        # plt.title("Potential Matrix")
         plt.grid()
         plt.savefig(f"./plots/{potential_type}_plots/potential_plot.png")
         plt.close()
@@ -19,9 +19,9 @@ def plot_potential(potential_matrix, potential_type, grid_info, is_shape):
         plt.imshow(potential_matrix, extent=[grid_info[0], grid_info[1], grid_info[2], grid_info[3]], origin='lower', cmap='coolwarm', alpha=0.8)
         # plt.colorbar(label="Potential")
 
-        plt.xlabel("x")
-        plt.ylabel("y")
-        plt.title("Potential Matrix")
+        # plt.xlabel("x")
+        # plt.ylabel("y")
+        # plt.title("Potential Matrix")
         plt.grid()
         plt.savefig(f"./plots/{potential_type}_plots/potential_plot.png")
         plt.close()
@@ -104,7 +104,7 @@ def plot_prob_densities_from_shape(eigenvectors, grid_size, max_level, potential
 
 def plot_nodal_lines(eigenvectors, grid_size, max_level, potential_type):
     for state in range(max_level):
-        fig, ax = plt.subplots(1, 1)
+        fig, ax = plt.subplots(1, 1, figsize=(6,6))
         ax.contour(eigenvectors.T[state].reshape((grid_size,grid_size)), levels=[0], colors='black', linewidths=1.0)
         plt.setp(ax, xticks=[], yticks=[])
         ax.set_aspect('equal')
