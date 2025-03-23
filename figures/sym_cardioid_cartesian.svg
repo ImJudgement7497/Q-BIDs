@@ -5,11 +5,11 @@
    viewBox="0 0 432 432"
    version="1.1"
    id="svg41"
-   sodipodi:docname="cardioid_cartesian.svg"
-   inkscape:export-filename="cardioid_cartesian.png"
+   sodipodi:docname="sym_cardioid_cartesian.svg"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   inkscape:export-filename="sym_cardioid_cartesian.png"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
-   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -28,15 +28,16 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="pt"
-     inkscape:zoom="1.4010417"
-     inkscape:cx="288"
-     inkscape:cy="288"
+     inkscape:zoom="0.99068606"
+     inkscape:cx="228.62944"
+     inkscape:cy="257.90208"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg41" />
+     inkscape:current-layer="svg41"
+     inkscape:export-bgcolor="#ffffff00" />
   <metadata
      id="metadata1">
     <rdf:RDF>
@@ -55,9 +56,35 @@
   </metadata>
   <defs
      id="defs1">
+    <linearGradient
+       id="swatch43"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#f50000;stop-opacity:1;"
+         offset="0"
+         id="stop43" />
+    </linearGradient>
+    <linearGradient
+       id="swatch42"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#f50000;stop-opacity:1;"
+         offset="0"
+         id="stop42" />
+    </linearGradient>
     <style
        type="text/css"
        id="style1">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#swatch42"
+       id="linearGradient43"
+       x1="81.900002"
+       y1="218.16"
+       x2="308.07916"
+       y2="218.16"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.001487,0,0,1,0.27821378,0)" />
   </defs>
   <g
      id="figure_1">
@@ -692,4 +719,8 @@
          id="rect41" />
     </clipPath>
   </defs>
+  <path
+     style="fill:#000000;fill-opacity:0;stroke:url(#linearGradient43);stroke-width:0.75;stroke-dasharray:8.99999365,8.99999365;stroke-dashoffset:0;stroke-opacity:1"
+     d="M 82.3,218.16 H 308.8155"
+     id="path42" />
 </svg>
