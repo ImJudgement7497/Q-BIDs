@@ -43,11 +43,11 @@ x = y = [-8.5, 8.5] for a = 2"""
 r""" Cardioid Equation for constant a
 x=[-9, 3]
 y=[-6, 6]"""
-def function(x, y, a=2):
-    r = np.sqrt(x**2 + y**2)
-    theta = np.arctan2(y, x)
+# def function(x, y, a=2):
+#     r = np.sqrt(x**2 + y**2)
+#     theta = np.arctan2(y, x)
     
-    return r - 2*a*(1-np.cos(theta))
+#     return r - 2*a*(1-np.cos(theta))
 
 r""" Astroid Equation for constant a"""
 # def function(x, y, a=5):
@@ -55,8 +55,8 @@ r""" Astroid Equation for constant a"""
 #     return (inside)**3 + 27*(a**2)*(x**2)*(y**2)
 
 r"""Circle Equation for radius a"""
-# def function(x, y, a=5):
-#     return x**2 + y**2 - a**2
+def function(x, y, a=4):
+    return x**2 + y**2 - a**2
     
 r"""Polar Nephroid Equation for constant a"""
 # def function(x, y, a=1):
