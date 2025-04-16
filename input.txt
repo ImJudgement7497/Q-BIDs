@@ -1,4 +1,4 @@
-potential_image_name = input_test_9.png
+potential_image_name = input_possible_counter_g=500.png
 #function = astroid_a=5_g=250
 #function = cardioid_cartesian_g=250
 #function = circle_g=250
@@ -7,7 +7,7 @@ x_start = -5
 x_end = 5
 y_start = -5
 y_end = 5
-grid_size = 250
+grid_size = 500
 
-max_level = 2
+max_level = 6
 boundary_value = 1e9
