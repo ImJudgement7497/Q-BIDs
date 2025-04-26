@@ -30,12 +30,10 @@ def plot_potential(potential_matrix, potential_type, grid_info, is_shape):
 
 def plot_eigenfunctions_from_image(eigenvectors, potential_info, max_level, image_file):
     N = potential_info[1]
-    edges = potential_info[2]
     for state in range(max_level):
-        plt.figure(state, figsize=(8, 8))
-        plt.imshow(edges, cmap="gray", alpha = 0.3)
-        eig = plt.imshow(eigenvectors.T[state].reshape((N,N)), cmap="viridis", alpha=0.7)
-        plt.title(f"State {state} eigenfunction", fontsize=16)
+        plt.figure(state, figsize=(6, 6))
+        eig = plt.imshow(eigenvectors.T[state].reshape((N,N)), cmap="gray")
+        #plt.title(f"State {state} eigenfunction", fontsize=16)
         plt.axis("off")
         # plt.colorbar(eig)
         plt.tight_layout()
@@ -46,7 +44,7 @@ def plot_prob_densities_from_image(eigenvectors, potential_info, max_level, imag
     N = potential_info[1]
     edges = potential_info[2]
     for state in range(max_level):
-        plt.figure(state, figsize=(8, 8))
+        plt.figure(state, figsize=(6, 6))
         plt.imshow(edges, cmap="gray", alpha = 0.3)
         prob_density = (np.abs(eigenvectors.T[state].reshape((N,N))))**2
         eig = plt.imshow(prob_density, cmap="viridis", alpha=0.7)
@@ -59,9 +57,9 @@ def plot_prob_densities_from_image(eigenvectors, potential_info, max_level, imag
 
 def plot_eigenfunctions_from_shape(eigenvectors, grid_size, max_level, potential_type):
     for state in range(max_level):
-        plt.figure(state, figsize=(8, 8))
-        eig = plt.imshow(eigenvectors.T[state].reshape((grid_size,grid_size)), cmap="viridis")
-        plt.title(f"State {state} eigenfunction", fontsize=16)
+        plt.figure(state, figsize=(6, 6))
+        eig = plt.imshow(eigenvectors.T[state].reshape((grid_size,grid_size)), cmap="gray")
+        #plt.title(f"State {state} eigenfunction", fontsize=16)
         plt.axis("off")
         # plt.colorbar(eig)
         plt.tight_layout()

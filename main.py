@@ -74,7 +74,7 @@ eigenvalues, eigenvectors = scipy.sparse.linalg.eigsh(Hamiltonian, k=max_level, 
 eigenvectors *= grid_info[-1] ** 2
 
 print("Solved!")
-#plot_eigenfunctions_from_shape(eigenvectors, grid_info[4], max_level, potential_type) if is_shape else plot_eigenfunctions_from_image(eigenvectors, potential_matrix.shape, max_level, potential_type)
+plot_eigenfunctions_from_shape(eigenvectors, grid_info[4], max_level, potential_type) if is_shape else plot_eigenfunctions_from_image(eigenvectors, potential_matrix.shape, max_level, potential_type)
 plot_nodal_lines(eigenvectors, grid_info[4] if is_shape else potential_matrix.shape[0], max_level, potential_type)
 
 print("Done")
